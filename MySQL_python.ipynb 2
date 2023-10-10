@@ -1,0 +1,73 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "93snrwxM5qqQ"
+      },
+      "outputs": [],
+      "source": [
+        "#importing libraries\n",
+        "\n",
+        "import mysql.connector\n",
+        "from mysql.connector import Error\n",
+        "import pandas as pd\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "  try:\n",
+        "    connection=mysql.connector.connect(\n",
+        "        host='',\n",
+        "        database='',\n",
+        "        user='',\n",
+        "        password='',\n",
+        "        auth_plugin=''\n",
+        "    )\n",
+        "    if connection.is_connected():\n",
+        "      db_info=connection.get_server_info()\n",
+        "      print('Connected to MySQL Server Version ',db_info)\n",
+        "      cursor = connection.cursor()\n",
+        "      cursor.execute(\"select database();\")\n",
+        "      record = cursor.fetchone()\n",
+        "      print(\"Your connected to database: \", record)\n",
+        "      sql_select_Query=''\n",
+        "      cursor=connection.cursor()\n",
+        "      cursor.execute(sql_select_Query)\n",
+        "      records=cursor.fetchall()\n",
+        "      print('')\n",
+        "      for row in records:\n",
+        "        print('')\n",
+        "  except Error as e:\n",
+        "    print('Error while connecting to MySQL', e)\n",
+        "  finally:\n",
+        "    if(connection.is_connected()):\n",
+        "      cursor.close()\n",
+        "      connection.close()\n",
+        "      print('MySQL connection is closed')"
+      ],
+      "metadata": {
+        "id": "MxlUZDxp55DO"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
